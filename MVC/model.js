@@ -32,19 +32,19 @@ var Model = {
         return this.callApi('audio.get', {});
     },
     getFriends: function() {
-        return this.callApi('friends.get', {fields: 'photo_100'});
+        return this.callApi('friends.get', {fields: 'photo_100', https:1});
     },
     getNews: function() {
-          return this.callApi('newsfeed.get', {filters: 'post', count: 20});
+          return this.callApi('newsfeed.get', {filters: 'post', count: 20, https:1});
     },
     getGroups: function() {
-        return this.callApi('groups.get', {fields: 'name,photo_50',extended:'1', v:5.53});
+        return this.callApi('groups.get', {fields: 'name,photo_50',extended:'1', v:5.53, https:1});
     },
     getAlbums: function() {
-        return this.callApi('photos.getAlbums', {v:5.53});
+        return this.callApi('photos.getAlbums', {v:5.53, https:1});
     },
     getPhotos: function(album_id) {
-        return this.callApi('photos.get', {album_id:album_id, extended:'1', v:5.53});
+        return this.callApi('photos.get', {album_id:album_id, extended:'1', v:5.53, https:1});
     },
     getPhotoComments: function(id) {
         return this.callApi('photos.getComments', {
@@ -52,7 +52,8 @@ var Model = {
           fields:"photo_50",
           extended:'1',
           v:5.53,
-          count:100
+          count:100,
+          https:1
         });
     },
     sortPhotos: function(album,type,direction){
