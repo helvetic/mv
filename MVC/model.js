@@ -35,6 +35,41 @@ var Model = {
         return this.callApi('friends.get', {fields: 'photo_100'});
     },
     getNews: function() {
-        return this.callApi('newsfeed.get', {filters: 'post', count: 20});
+          return this.callApi('newsfeed.get', {filters: 'post', count: 20});
+    },
+    getGroups: function() {
+        return this.callApi('groups.get', {fields: 'name,photo_50',extended:'1', v:5.53});
+    },
+    getAlbums: function() {
+        return this.callApi('photos.getAlbums', {v:5.53});
+    },
+    getPhotos: function(album_id) {
+        return this.callApi('photos.get', {album_id:album_id, extended:'1', v:5.53});
+    },
+    getPhotoComments: function(id) {
+        return this.callApi('photos.getComments', {
+          photo_id:id,
+          fields:"photo_50",
+          extended:'1',
+          v:5.53,
+          count:100
+        });
+    },
+    sortPhotos: function(album,type,direction){
+      return album.sort(function(a,b){
+        var first,second;
+        if(direction == 'inc'){
+          first = a;
+          second = b;
+        }else{
+          first = b;
+          second = a;
+        }
+        if(type != 'date'){
+          return second[type]['count'] - first[type]['count'];
+        }else{
+          return second.id-first.id;
+        }
+      });
     }
 };
